@@ -1,0 +1,22 @@
+{
+  "name": "ripley",
+  "version": "0.1.0",
+  "scripts": {
+    "build-vue": "echo 'build-vue'",
+    "lint-vue": "echo 'lint-vue'",
+    "lint-vue-fix": "echo 'lint-vue-fix'",
+    "serve-vue": "echo 'serve-vue'"
+  },
+  "dependencies": {
+    "axios": "0.27.2"
+  },
+  "devDependencies": {
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ets-berkeley-edu/ripley.git"
+  },
+  "resolutions": {
+  }
+}

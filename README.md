@@ -27,7 +27,7 @@ npm install
 
 ```
 createuser TBD --no-createdb --no-superuser --no-createrole --pwprompt
-createdb TBD --owner=diablo
+createdb TBD --owner=TBD
 createdb TBD_test --owner=TBD
 
 # Load schema
@@ -40,7 +40,7 @@ flask initdb
 If you plan to use any resources outside localhost, put your configurations in a separately encrypted area:
 
 ```
-mkdir /Volumes/XYZ/diablo_config
+mkdir /Volumes/XYZ/ripley_config
 export RIPLEY_LOCAL_CONFIGS=/Volumes/XYZ/ripley_config
 ```
 
