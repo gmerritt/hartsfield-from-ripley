@@ -47,9 +47,6 @@ export function registerUtils(app: App) {
   app.config.globalProperties.$_ = _
   // app.config.globalProperties.$eventHub = mitt()  TODO: Use 'mitt' to emit and listen for events.
   app.config.globalProperties.$loading = (label: string) => contextStore.loadingStart(label)
-  app.config.globalProperties.$ready = (label: string, focusTarget: string) => contextStore.loadingComplete({
-    label,
-    focusTarget
-  })
+  app.config.globalProperties.$ready = (label: string, focusTarget: string) => contextStore.loadingComplete(label, focusTarget)
   app.config.globalProperties.$putFocusNextTick = putFocusNextTick
 }
