@@ -22,32 +22,20 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 ENHANCEMENTS, OR MODIFICATIONS.
 """
-import os
 
-import pytest
-import ripley.factory
+import urllib
 
-
-os.environ['RIPLEY_ENV'] = 'test'  # noqa
-
-# Because app and db fixtures are only created once per pytest run, individual tests
-# are not able to modify application configuration values before the app is created.
-# Per-test customizations could be supported via a fixture scope of 'function' and
-# the @pytest.mark.parametrize annotation.
+from flask import Response
+import simplejson as json
 
 
-@pytest.fixture(scope='session')
-def app(request):
-    """Fixture application object, shared by all tests."""
-    _app = ripley.factory.create_app()
+def add_param_to_url(url, param):
+    parsed_url = urllib.parse.urlparse(url)
+    parsed_query = urllib.parse.parse_qsl(parsed_url.query)
+    parsed_query.append(param)
+    return urllib.parse.urlunparse(parsed_url._replace(query=urllib.parse.urlencode(parsed_query)))
 
-    # Create app context before running tests.
-    ctx = _app.app_context()
-    ctx.push()
 
-    def teardown():
-        # Pop the context after running tests.
-        ctx.pop()
-
-    request.addfinalizer(teardown)
-    return _app
+def tolerant_jsonify(obj, status=200, **kwargs):
+    content = json.dumps(obj, ignore_nan=True, separators=(',', ':'), **kwargs)
+    return Response(content, mimetype='application/json', status=status)

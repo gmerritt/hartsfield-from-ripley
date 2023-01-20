@@ -31,6 +31,9 @@ DEV_AUTH_PASSWORD = 'another secret'
 # Directory to search for mock fixtures, if running in "test" or "demo" mode.
 FIXTURES_PATH = None
 
+# Minutes of inactivity before session cookie is destroyed
+INACTIVE_SESSION_LIFETIME = 120
+
 # These "INDEX_HTML" defaults are good in ripley-[dev|qa|prod]. See development.py for local configs.
 INDEX_HTML = 'dist/static/index.html'
 
@@ -41,6 +44,9 @@ LOGGING_LEVEL = logging.DEBUG
 LOGGING_PROPAGATION_LEVEL = logging.WARN
 
 REMEMBER_COOKIE_NAME = 'remember_ripley_token'
+
+# Used to encrypt session cookie.
+SECRET_KEY = 'secret'
 
 TIMEZONE = 'America/Los_Angeles'
 

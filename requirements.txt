@@ -1,6 +1,11 @@
 Flask==2.2.2
+Flask-Login==0.6.2
+python-dateutil==2.8.2
+pytz==2022.7.1
+simplejson==3.18.1
 Werkzeug==2.2.2
 
 # For testing
-pytest==7.2.0
-tox==4.2.6
+pytest==7.2.1
+pytest-flask==1.2.0
+tox==4.3.5

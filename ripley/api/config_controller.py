@@ -22,32 +22,47 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 ENHANCEMENTS, OR MODIFICATIONS.
 """
-import os
+from collections import OrderedDict
+import json
 
-import pytest
-import ripley.factory
+from flask import current_app as app
+from ripley import __version__ as version
+from ripley.lib.http import tolerant_jsonify
+from ripley.lib.util import get_eb_environment
+
+PUBLIC_CONFIGS = [
+    'DEV_AUTH_ENABLED',
+    'RIPLEY_ENV',
+    'TIMEZONE',
+]
 
 
-os.environ['RIPLEY_ENV'] = 'test'  # noqa
+@app.route('/api/config')
+def app_config():
+    def _to_api_key(key):
+        chunks = key.split('_')
+        return f"{chunks[0].lower()}{''.join(chunk.title() for chunk in chunks[1:])}"
 
-# Because app and db fixtures are only created once per pytest run, individual tests
-# are not able to modify application configuration values before the app is created.
-# Per-test customizations could be supported via a fixture scope of 'function' and
-# the @pytest.mark.parametrize annotation.
+    api_json = {
+        **dict((_to_api_key(key), app.config[key]) for key in PUBLIC_CONFIGS),
+        **{
+            'ebEnvironment': get_eb_environment(),
+        },
+    }
+    return tolerant_jsonify(OrderedDict(sorted(api_json.items())))
 
 
-@pytest.fixture(scope='session')
-def app(request):
-    """Fixture application object, shared by all tests."""
-    _app = ripley.factory.create_app()
+@app.route('/api/version')
+def app_version():
+    build_stats = load_json('config/build-summary.json')
+    v = {'version': version}
+    v.update(build_stats or {'build': None})
+    return tolerant_jsonify(v)
 
-    # Create app context before running tests.
-    ctx = _app.app_context()
-    ctx.push()
 
-    def teardown():
-        # Pop the context after running tests.
-        ctx.pop()
-
-    request.addfinalizer(teardown)
-    return _app
+def load_json(relative_path):
+    try:
+        file = open(app.config['BASE_DIR'] + '/' + relative_path)
+        return json.load(file)
+    except (FileNotFoundError, KeyError, TypeError):
+        return None

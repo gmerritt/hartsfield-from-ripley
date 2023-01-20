@@ -22,32 +22,37 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 ENHANCEMENTS, OR MODIFICATIONS.
 """
-import os
-
-import pytest
-import ripley.factory
-
-
-os.environ['RIPLEY_ENV'] = 'test'  # noqa
-
-# Because app and db fixtures are only created once per pytest run, individual tests
-# are not able to modify application configuration values before the app is created.
-# Per-test customizations could be supported via a fixture scope of 'function' and
-# the @pytest.mark.parametrize annotation.
+from flask import current_app as app
+import ripley.api.errors
+from ripley.lib.http import tolerant_jsonify
 
 
-@pytest.fixture(scope='session')
-def app(request):
-    """Fixture application object, shared by all tests."""
-    _app = ripley.factory.create_app()
+@app.errorhandler(ripley.api.errors.BadRequestError)
+def handle_bad_request(error):
+    return error.to_json(), 400
 
-    # Create app context before running tests.
-    ctx = _app.app_context()
-    ctx.push()
 
-    def teardown():
-        # Pop the context after running tests.
-        ctx.pop()
+@app.errorhandler(ripley.api.errors.UnauthorizedRequestError)
+def handle_unauthorized(error):
+    return error.to_json(), 401
 
-    request.addfinalizer(teardown)
-    return _app
+
+@app.errorhandler(ripley.api.errors.ForbiddenRequestError)
+def handle_forbidden(error):
+    return error.to_json(), 403
+
+
+@app.errorhandler(ripley.api.errors.ResourceNotFoundError)
+def handle_resource_not_found(error):
+    return error.to_json(), 404
+
+
+@app.errorhandler(ripley.api.errors.InternalServerError)
+def handle_internal_server_error(error):
+    return error.to_json(), 500
+
+
+@app.errorhandler(Exception)
+def handle_unexpected_error(error):
+    app.logger.exception(error)
+    return tolerant_jsonify({'message': 'An unexpected server error occurred.'}), 500
