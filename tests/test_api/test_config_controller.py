@@ -24,8 +24,29 @@ ENHANCEMENTS, OR MODIFICATIONS.
 """
 
 
+class TestVersion:
+    """Application version API."""
+
+    def test_anonymous_version_request(self, client):
+        """All users, even anonymous, can get version info."""
+        response = client.get('/api/version')
+        assert response.status_code == 200
+        assert 'version' in response.json
+        assert 'build' in response.json
+
+
 class TestConfigController:
 
-    def test_anonymous(self):
+    def test_anonymous(self, client):
         """All users, even anonymous, can get configs."""
-        assert False is not True
+        response = client.get('/api/config')
+        assert response.status_code == 200
+        assert 'ripleyEnv' in response.json
+        api_json = response.json
+        assert api_json['devAuthEnabled'] is False
+        assert api_json['ebEnvironment'] == 'ripley-test'
+        assert api_json['timezone'] == 'America/Los_Angeles'
+
+        api_json_lower_string = str(api_json).lower()
+        for keyword in ('password', 'secret'):
+            assert keyword not in api_json_lower_string

@@ -22,32 +22,37 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 ENHANCEMENTS, OR MODIFICATIONS.
 """
-import os
-
-import pytest
-import ripley.factory
+from ripley.lib.http import tolerant_jsonify
 
 
-os.environ['RIPLEY_ENV'] = 'test'  # noqa
+class JsonableError(Exception):
 
-# Because app and db fixtures are only created once per pytest run, individual tests
-# are not able to modify application configuration values before the app is created.
-# Per-test customizations could be supported via a fixture scope of 'function' and
-# the @pytest.mark.parametrize annotation.
+    def __init__(self, message):
+        Exception.__init__(self)
+        self.message = message
+
+    def to_json(self):
+        if self.message:
+            return tolerant_jsonify({'message': self.message})
+        else:
+            return ''
 
 
-@pytest.fixture(scope='session')
-def app(request):
-    """Fixture application object, shared by all tests."""
-    _app = ripley.factory.create_app()
+class BadRequestError(JsonableError):
+    pass
 
-    # Create app context before running tests.
-    ctx = _app.app_context()
-    ctx.push()
 
-    def teardown():
-        # Pop the context after running tests.
-        ctx.pop()
+class UnauthorizedRequestError(JsonableError):
+    pass
 
-    request.addfinalizer(teardown)
-    return _app
+
+class ForbiddenRequestError(JsonableError):
+    pass
+
+
+class ResourceNotFoundError(JsonableError):
+    pass
+
+
+class InternalServerError(JsonableError):
+    pass

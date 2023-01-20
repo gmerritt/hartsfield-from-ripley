@@ -22,32 +22,15 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 ENHANCEMENTS, OR MODIFICATIONS.
 """
-import os
-
-import pytest
-import ripley.factory
+from contextlib import contextmanager
 
 
-os.environ['RIPLEY_ENV'] = 'test'  # noqa
-
-# Because app and db fixtures are only created once per pytest run, individual tests
-# are not able to modify application configuration values before the app is created.
-# Per-test customizations could be supported via a fixture scope of 'function' and
-# the @pytest.mark.parametrize annotation.
-
-
-@pytest.fixture(scope='session')
-def app(request):
-    """Fixture application object, shared by all tests."""
-    _app = ripley.factory.create_app()
-
-    # Create app context before running tests.
-    ctx = _app.app_context()
-    ctx.push()
-
-    def teardown():
-        # Pop the context after running tests.
-        ctx.pop()
-
-    request.addfinalizer(teardown)
-    return _app
+@contextmanager
+def override_config(app, key, value):
+    """Temporarily override an app config value."""
+    old_value = app.config[key]
+    app.config[key] = value
+    try:
+        yield
+    finally:
+        app.config[key] = old_value

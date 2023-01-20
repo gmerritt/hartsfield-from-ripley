@@ -22,32 +22,18 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 ENHANCEMENTS, OR MODIFICATIONS.
 """
-import os
+from functools import wraps
 
-import pytest
-import ripley.factory
-
-
-os.environ['RIPLEY_ENV'] = 'test'  # noqa
-
-# Because app and db fixtures are only created once per pytest run, individual tests
-# are not able to modify application configuration values before the app is created.
-# Per-test customizations could be supported via a fixture scope of 'function' and
-# the @pytest.mark.parametrize annotation.
+from flask import current_app as app, request
+from flask_login import current_user
 
 
-@pytest.fixture(scope='session')
-def app(request):
-    """Fixture application object, shared by all tests."""
-    _app = ripley.factory.create_app()
-
-    # Create app context before running tests.
-    ctx = _app.app_context()
-    ctx.push()
-
-    def teardown():
-        # Pop the context after running tests.
-        ctx.pop()
-
-    request.addfinalizer(teardown)
-    return _app
+def admin_required(func):
+    @wraps(func)
+    def _admin_required(*args, **kw):
+        if current_user.is_admin:
+            return func(*args, **kw)
+        else:
+            app.logger.warning(f'Unauthorized request to {request.path}')
+            return app.login_manager.unauthorized()
+    return _admin_required

@@ -24,6 +24,7 @@
     "webfontloader": "1.6.28"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.191",
     "@types/node": "^18.11.18",
     "@types/webfontloader": "^1.6.35",
     "@vitejs/plugin-vue": "^3.2.0",

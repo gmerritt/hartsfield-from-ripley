@@ -24,21 +24,23 @@ ENHANCEMENTS, OR MODIFICATIONS.
 """
 
 from flask import Flask
+from ripley.configs import load_configs
+from ripley.logger import initialize_logger
+from ripley.routes import register_routes
 
 
 def create_app():
     """Initialize Ripley."""
     app = Flask(__name__.split('.')[0])
-    # TODO
-    # load_configs(app)
-    # initialize_logger(app)
+    load_configs(app)
+    initialize_logger(app)
+    # TODO for cache?
     # cache.init_app(app)
     # cache.clear()
+    # TODO: db
     # db.init_app(app)
 
-    # TODO
-    # if not standalone:
-    #     with app.app_context():
-    #         register_routes(app)
+    with app.app_context():
+        register_routes(app)
 
     return app
