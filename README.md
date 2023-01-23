@@ -26,9 +26,9 @@ npm install
 ![Photo of computer room of the movie Alien.](src/assets/muthur.png)
 
 ```
-createuser TBD --no-createdb --no-superuser --no-createrole --pwprompt
-createdb TBD --owner=TBD
-createdb TBD_test --owner=TBD
+createuser ripley --no-createdb --no-superuser --no-createrole --pwprompt
+createdb nostromo --owner=ripley
+createdb nostromo_test --owner=ripley
 
 # Load schema
 export FLASK_APP=application.py
