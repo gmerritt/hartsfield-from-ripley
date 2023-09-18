@@ -1,7 +1,7 @@
 <template>
   <div>
     <VueAnnouncer class="sr-only" />
-    <div v-if="!isInIframe" class="cc-accessibility-links">
+<!--     <div v-if="!isInIframe" class="cc-accessibility-links">
       <a
         id="skip-to-content-link"
         href="#cc-main-content"
@@ -11,7 +11,7 @@
       >
         Skip to content
       </a>
-    </div>
+    </div> -->
     <router-view />
   </div>
 </template>

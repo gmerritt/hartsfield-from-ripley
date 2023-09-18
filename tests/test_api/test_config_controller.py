@@ -41,10 +41,10 @@ class TestConfigController:
         """All users, even anonymous, can get configs."""
         response = client.get('/api/config')
         assert response.status_code == 200
-        assert 'ripleyEnv' in response.json
+        assert 'hartsfieldEnv' in response.json
         api_json = response.json
         assert api_json['devAuthEnabled'] is False
-        assert api_json['ebEnvironment'] == 'ripley-test'
+        assert api_json['ebEnvironment'] == 'hartsfield-test'
         assert api_json['timezone'] == 'America/Los_Angeles'
 
         api_json_lower_string = str(api_json).lower()

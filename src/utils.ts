@@ -2,6 +2,8 @@ import _ from 'lodash'
 import router from './router'
 import {App, nextTick} from 'vue'
 import { useContextStore } from '@/stores/context'
+import axios from 'axios'
+import utils from '@/api/api-utils'
 
 const $_axiosErrorHandler = (error: any) => {
   const errorStatus = _.get(error, 'response.status')
@@ -27,6 +29,14 @@ const $_axiosErrorHandler = (error: any) => {
     })
   }
 }
+
+export function fetchUrl(gs_source_url: string) {
+//  return utils.post('/api/fetch_url_direct',{gs_source_url})
+  return "https://google.com/download.tgz"
+
+}
+
+
 
 export const putFocusNextTick = (id: string, cssSelector?: string) => {
   const callable = () => {

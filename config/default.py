@@ -34,16 +34,16 @@ FIXTURES_PATH = None
 # Minutes of inactivity before session cookie is destroyed
 INACTIVE_SESSION_LIFETIME = 120
 
-# These "INDEX_HTML" defaults are good in ripley-[dev|qa|prod]. See development.py for local configs.
+# These "INDEX_HTML" defaults are good in hartsfield-[dev|qa|prod]. See development.py for local configs.
 INDEX_HTML = 'dist/static/index.html'
 
 # Logging
 LOGGING_FORMAT = '[%(asctime)s] - %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
-LOGGING_LOCATION = 'ripley.log'
+LOGGING_LOCATION = 'hartsfield.log'
 LOGGING_LEVEL = logging.DEBUG
 LOGGING_PROPAGATION_LEVEL = logging.WARN
 
-REMEMBER_COOKIE_NAME = 'remember_ripley_token'
+REMEMBER_COOKIE_NAME = 'remember_hartsfield_token'
 
 # Used to encrypt session cookie.
 SECRET_KEY = 'secret'

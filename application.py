@@ -26,7 +26,7 @@ ENHANCEMENTS, OR MODIFICATIONS.
 import os
 import subprocess
 
-from ripley.factory import create_app
+from hartsfield.factory import create_app
 
 """Usage mode A:
 
@@ -60,6 +60,7 @@ def initdb():
 
 host = application.config['HOST']
 port = application.config['PORT']
+
 
 if __name__ == '__main__':
     application.logger.info('Starting development server on %s:%s', host, port)

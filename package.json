@@ -1,5 +1,5 @@
 {
-  "name": "ripley",
+  "name": "hartsfield",
   "version": "0.1.0",
   "private": false,
   "scripts": {
@@ -7,7 +7,7 @@
     "lint-vue": "eslint . --ignore-path .gitignore",
     "lint-vue-fix": "eslint . --fix --ignore-path .gitignore",
     "preview": "vite preview",
-    "serve-vue": "vite"
+    "serve-vue": "vite --debug --logLevel info"
   },
   "dependencies": {
     "@mdi/font": "7.1.96",

@@ -3,7 +3,7 @@
 # -------------------------------------------------------------------
 #
 # Copy config file from S3 to production-local.py. This
-# script must be run on the target EC2 instance (eg, ripley-dev).
+# script must be run on the target EC2 instance (eg, hartsfield-dev).
 #
 # -------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ else
 fi
 
 # Download from Amazon S3
-config_location="s3://ripley-deploy-configs/ripley/${eb_env}.py"
+config_location="s3://hartsfield-deploy-configs/hartsfield/${eb_env}.py"
 
 echo "In five seconds, ${config_location} will be copied to ${local_config}."; echo
 echo "Use CTRL-C to abort..."; echo
@@ -49,6 +49,6 @@ chmod 400 "${local_config}"
 printf "\nEB_ENVIRONMENT = '${eb_env}'\n\n" >> "${local_config}"
 
 echo; echo "Done!"; echo
-echo "Restart Ripley to pick up new configs. Have a nice day!"; echo
+echo "Restart Hartsfield to pick up new configs. Have a nice day!"; echo
 
 exit 0

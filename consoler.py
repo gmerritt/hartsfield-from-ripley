@@ -23,12 +23,12 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 ENHANCEMENTS, OR MODIFICATIONS.
 """
 
-from ripley.factory import create_app
+from hartsfield.factory import create_app
 
 """Run Flask-wrapped code from a Python console.
 
 * From the command line:
-    ``ripley> python -i consoler.py``
+    ``hartsfield> python -i consoler.py``
 
 * In PyCharm preferences, go to "Build, Execution, Deployment"
 * For "Console", enable "Always show debug console"
@@ -39,7 +39,7 @@ from ripley.factory import create_app
 * Click on "Python Console"
 * Click the bug icon to start a debugging session:
 
->>> from ripley.models.authorized_user import AuthorizedUser
+>>> from hartsfield.models.authorized_user import AuthorizedUser
 >>> rows = AuthorizedUser.query.all()
 >>> pp(rows)
 [

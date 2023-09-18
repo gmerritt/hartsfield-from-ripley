@@ -25,10 +25,10 @@ ENHANCEMENTS, OR MODIFICATIONS.
 import os
 
 import pytest
-import ripley.factory
+import hartsfield.factory
 
 
-os.environ['RIPLEY_ENV'] = 'test'  # noqa
+os.environ['HARTSFIELD_ENV'] = 'test'  # noqa
 
 # Because app and db fixtures are only created once per pytest run, individual tests
 # are not able to modify application configuration values before the app is created.
@@ -39,7 +39,7 @@ os.environ['RIPLEY_ENV'] = 'test'  # noqa
 @pytest.fixture(scope='session')
 def app(request):
     """Fixture application object, shared by all tests."""
-    _app = ripley.factory.create_app()
+    _app = hartsfield.factory.create_app()
 
     # Create app context before running tests.
     ctx = _app.app_context()

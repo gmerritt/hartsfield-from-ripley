@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+const Fetchurl = () => import('./views/Fetchurl.vue')
 
 const routes = [
   {
@@ -13,6 +14,14 @@ const routes = [
       },
     ],
   },
+  {
+    component: Fetchurl,
+    path: '/fetchurl',
+    meta: {
+      title: 'Fetch URL',
+    }
+  },
+
 ]
 
 const router = createRouter({

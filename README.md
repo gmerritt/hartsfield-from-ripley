@@ -1,8 +1,8 @@
-# Ripley
+# Hartsfield
 
-Ripley heroically supports UC Berkeley's Canvas LMS instance.
+Hartsfield humbly supports UC Berkeley's DataHub.
 
-![Ripley, a character from the movie Alien, is holding a cat.](src/assets/ripley-with-cat.png)
+![Hartsfield, re-imagined as a field of hearts.](src/assets/hEartsfield.png)
 
 ## Installation
 
@@ -14,58 +14,29 @@ Ripley heroically supports UC Berkeley's Canvas LMS instance.
 pip3 install -r requirements.txt [--upgrade]
 ```
 
-### Front-end dependencies
 
-```
-nvm use
-npm install
-```
-
-### Create Postgres user and databases
-
-![Photo of computer room of the movie Alien.](src/assets/muthur.png)
-
-```
-createuser ripley --no-createdb --no-superuser --no-createrole --pwprompt
-createdb nostromo --owner=ripley
-createdb nostromo_test --owner=ripley
-
-# Load schema
-export FLASK_APP=application.py
-flask initdb
-```
 
 ### Create local configurations
 
 If you plan to use any resources outside localhost, put your configurations in a separately encrypted area:
 
 ```
-mkdir /Volumes/XYZ/ripley_config
-export RIPLEY_LOCAL_CONFIGS=/Volumes/XYZ/ripley_config
+mkdir /Volumes/XYZ/hartsfield_config
+export HARTSFIELD_LOCAL_CONFIGS=/Volumes/XYZ/hartsfield_config
 ```
 
-## Run tests, lint the code
-
-We use [Tox](https://tox.readthedocs.io) for continuous integration. Under the hood, you'll find [PyTest](https://docs.pytest.org), [Flake8](http://flake8.pycqa.org) and [ESLint](https://eslint.org/). Please install NPM dependencies (see above) before running tests.
+## Greg does a jam like this from a pair of terminals in VSCode to run this locally:
 
 ```
-# Run all tests and linters with Tox's parallel mode:
-tox -p
-
-# Pytest
-tox -e test
-
-# Run specific test(s)
-tox -e test -- tests/test_models/test_foo.py
-tox -e test -- tests/test_externals/
-
-# Linters, à la carte
-tox -e lint-py
-tox -e lint-vue
-
-# Auto-fix linting errors in Vue code
-tox -e lint-vue-fix
-
-# Lint specific file(s)
-tox -e lint-py -- scripts/foo.py
+source venv/bin/activate
+export HARTSFIELD_LOCAL_CONFIGS=/Users/gregm/rip_hartsfield/hartsfield_config
+export HARTSFIELD_ENV=development
+venv/bin/python application.py
+```
+and
+```
+source venv/bin/activate
+export HARTSFIELD_LOCAL_CONFIGS=/Users/gregm/rip_hartsfield/hartsfield_config
+export HARTSFIELD_ENV=development
+npm run serve-vue
 ```

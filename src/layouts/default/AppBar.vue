@@ -1,7 +1,7 @@
 <template>
   <v-app-bar flat>
     <v-app-bar-title>
-      <v-icon icon="mdi-circle-slice-4" /> MU-TH-UR 6000
+      <v-icon icon="mdi-circle-slice-4" /> RTL / DataHub File Archive Signed URL Generator
     </v-app-bar-title>
   </v-app-bar>
 </template>

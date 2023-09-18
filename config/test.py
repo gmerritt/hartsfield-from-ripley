@@ -27,7 +27,7 @@ import os
 # Base directory for the application (one level up from this config file).
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-EB_ENVIRONMENT = 'ripley-test'
+EB_ENVIRONMENT = 'hartsfield-test'
 
 INDEX_HTML = f'{BASE_DIR}/tests/static/test-index.html'
 
