@@ -15,7 +15,6 @@ pip3 install -r requirements.txt [--upgrade]
 ```
 
 
-
 ### Create local configurations
 
 If you plan to use any resources outside localhost, put your configurations in a separately encrypted area:
@@ -40,3 +39,4 @@ export HARTSFIELD_LOCAL_CONFIGS=/Users/gregm/rip_hartsfield/hartsfield_config
 export HARTSFIELD_ENV=development
 npm run serve-vue
 ```
+
