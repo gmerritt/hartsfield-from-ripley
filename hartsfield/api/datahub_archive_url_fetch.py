@@ -86,15 +86,7 @@ def fetch_url_direct():
         gcp_response = "File \"" + blob_name + "\"does not exist in bucket \"" + bucket_name + "\""
         v = {'response': gcp_response, 'status': 'error'}
 
+    # Gregquestion
+    # The response v will need to have a nice, small set of fields to cleanly report the status of the url fetch,
+    # the url itself if successful, and any error messages if not. Is there a convention for this?
     return tolerant_jsonify(v)
-
-"""
-To make/fix/clean:
-
-- Make the Web request form / wire up web front end portion of app
-
-- CalNet auth in front of web app
-
-- All of the other ignorant/non-ideal coding practices I've done...!
-"""
-

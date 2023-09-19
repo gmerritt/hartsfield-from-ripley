@@ -6,7 +6,7 @@ Hartsfield humbly supports UC Berkeley's DataHub.
 
 ## Installation
 
-* Install Python 3.8
+* Install Python 3
 * Create your virtual environment (venv)
 * Install dependencies
 

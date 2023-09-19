@@ -31,7 +31,14 @@ const $_axiosErrorHandler = (error: any) => {
 }
 
 export function fetchUrl(gs_source_url: string) {
-//  return utils.post('/api/fetch_url_direct',{gs_source_url})
+  // Gregquestion
+  // The source starting-point version of Ripley did not seem to include the post (and related) functionality,
+  // which appeared in later versions of Ripley in api-utils.ts (/src/api/api-utils.ts).
+  // In later versions of Ripley, with the post support built-in, we'd do something like this:
+
+  //  return utils.post('/api/fetch_url_direct',{gs_source_url})
+
+  // For now, we'll just return a placeholder URL string:
   return "https://google.com/download.tgz"
 
 }
