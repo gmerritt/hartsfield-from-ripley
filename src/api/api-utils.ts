@@ -3,7 +3,6 @@ import axios from 'axios'
 import {useContextStore} from '@/stores/context'
 
 // Gregquestion
-const Gregquestion = true
 // I tried adding this file with a subset of the contents of the analgous file in the later version of Ripley,
 // but it didn't seem to be sufficient/correct.
 

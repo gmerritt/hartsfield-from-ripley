@@ -87,7 +87,6 @@ def fetch_url_direct():
         v = {'response': gcp_response, 'status': 'error'}
 
     # Gregquestion
-    Gregquestion = True
     # The response v will need to have a nice, small set of fields to cleanly report the status of the url fetch,
     # the url itself if successful, and any error messages if not. Is there a convention for this?
     return tolerant_jsonify(v)

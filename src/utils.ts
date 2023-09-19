@@ -32,7 +32,6 @@ const $_axiosErrorHandler = (error: any) => {
 
 export function fetchUrl(gs_source_url: string) {
   // Gregquestion
-  const Gregquestion = true
   // The source starting-point version of Ripley did not seem to include the post (and related) functionality,
   // which appeared in later versions of Ripley in api-utils.ts (/src/api/api-utils.ts).
   // In later versions of Ripley, with the post support built-in, we'd do something like this:
