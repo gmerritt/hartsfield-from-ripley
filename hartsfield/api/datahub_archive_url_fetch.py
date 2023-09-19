@@ -47,6 +47,7 @@ PUBLIC_CONFIGS = [
 gcp_json_credentials = app.config['GCP_JSON_CREDENTIALS']
 gcp_json_credentials_dict = json.loads(gcp_json_credentials)
 
+# Gregquestion 1-of-2 in this file
 # TODO: pass in gs url as input value to @app.route('/api/fetch_url_direct') from form user front-end form submission
 gs_source_url="gs://ucb-datahub-archived-homedirs/spring-2021/datahub.berkeley.edu/peterphu-2edo.tar.gz"
 # This will probably be request.args['gs_source_url'] in the def block...but that whole "request" business needs to be brought in etc.
@@ -86,7 +87,7 @@ def fetch_url_direct():
         gcp_response = "File \"" + blob_name + "\"does not exist in bucket \"" + bucket_name + "\""
         v = {'response': gcp_response, 'status': 'error'}
 
-    # Gregquestion
+    # Gregquestion 2-of-2 in this file
     # The response v will need to have a nice, small set of fields to cleanly report the status of the url fetch,
     # the url itself if successful, and any error messages if not. Is there a convention for this?
     return tolerant_jsonify(v)
