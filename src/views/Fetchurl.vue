@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isLoading && !error">
+  <div>
     <h1 class="page-fetch-url-header">Generate DataHub archive recovery URL</h1>
       <form class="bg-transparent border-0 canvas-form" @submit.prevent="fetchUrl">
         <v-container>
@@ -12,7 +12,7 @@
                 id="page-fetch-url-name"
                 v-model="gs_source_url"
                 class="w-50"
-                :disabled="isCreating"
+                :disabled="isRequesting"
                 placeholder="gs://"
               />
             </v-col>
@@ -22,13 +22,13 @@
         <div class="d-flex justify-end mt-4">
           <button
             id="fetch-url-button"
-            :disabled="isCreating"
+            :disabled="isRequesting"
             aria-controls="page-reader-alert"
             class="canvas-button canvas-button-primary"
             type="submit"
           >
-            <span v-if="!isCreating">Generate 7-day archive download URL</span>
-            <span v-if="isCreating">
+            <span v-if="!isRequesting">Generate 7-day archive download URL</span>
+            <span v-if="isRequesting">
               <v-progress-circular
                 class="mr-2"
                 color="primary"
@@ -42,9 +42,8 @@
       
 
       <div><span v-if="wasCreated">7-day download URL to deliver to user:</span></div>
-      <div><span v-if="wasCreated"> {{ download_url }} </span></div>
-
-
+      <div><span v-if="wasCreated"> {{ responseFromGcp }} </span></div>
+      <div><span v-if="failedCreate"> {{ responseFromGcp }}</span></div>
       
   </div>
   
@@ -59,18 +58,28 @@ export default {
   mixins: [Context],
   data: () => ({
     gs_source_url: undefined,
-    download_url: undefined,
-    isCreating: undefined,
-    wasCreated: undefined
+    responseFromGcp: undefined,
+    isRequesting: undefined,
+    wasCreated: undefined,
+    failedCreate: undefined
   }),
   methods: {
     fetchUrl() {
-      this.isCreating = true
-//      this.$announcer.polite('Fetching download url...')
-      this.download_url = fetchUrl(this.gs_source_url)
-      this.isCreating = false
-      this.wasCreated = true
+      this.isRequesting = true
+      fetchUrl(this.gs_source_url).then(response => {
+        this.isRequesting = false
+        if (response.data.status == "success") {
+          this.wasCreated = true
+          this.failedCreate = false
+        } else {
+          this.wasCreated = false
+          this.failedCreate = true
+        }
+        this.responseFromGcp = response.data.response
+      })
+      isRequesting = false
     }
   }
 }
 </script>
+

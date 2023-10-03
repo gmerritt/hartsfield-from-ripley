@@ -25,7 +25,7 @@ ENHANCEMENTS, OR MODIFICATIONS.
 from collections import OrderedDict
 import json
 
-from flask import current_app as app
+from flask import current_app as app, request
 from hartsfield import __version__ as version
 from hartsfield.configs import load_configs
 from hartsfield.api.config_controller import load_json
@@ -47,15 +47,15 @@ PUBLIC_CONFIGS = [
 gcp_json_credentials = app.config['GCP_JSON_CREDENTIALS']
 gcp_json_credentials_dict = json.loads(gcp_json_credentials)
 
-# Gregquestion 1-of-2 in this file
-# TODO: pass in gs url as input value to @app.route('/api/fetch_url_direct') from form user front-end form submission
-gs_source_url="gs://ucb-datahub-archived-homedirs/spring-2021/datahub.berkeley.edu/peterphu-2edo.tar.gz"
-# This will probably be request.args['gs_source_url'] in the def block...but that whole "request" business needs to be brought in etc.
-
-@app.route('/api/fetch_url_direct')
+# Gregquestion: is this better if it's POST?
+# See also where this is called in utils.ts.
+@app.route('/api/fetch_url_direct', methods=['GET'])
 def fetch_url_direct():
 
+
     # parse the input gs url to get bucket and blob names
+    #gs_source_url="gs://ucb-datahub-archived-homedirs/spring-2021/datahub.berkeley.edu/peterphu-2edo.tar.gz"
+    gs_source_url = str(request.args.get('gs_source_url'))
     bucket_and_blob_string = gs_source_url.replace("gs://", "")
     bucket_and_blob_list = bucket_and_blob_string.split("/")
     bucket_name = bucket_and_blob_list.pop(0)
@@ -67,11 +67,12 @@ def fetch_url_direct():
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(blob_name)
 
+    
     # do some checks to confirm that the bucket and blob exist
     try:
         stats = storage.Blob(bucket=bucket, name=blob_name).exists(storage_client)
     except Exception as e:
-        error_message = "There was a problem trying to get stats on the requested blob \"" + blob_name + "\" in the requested bucket \"" + bucket_name +"\":\n\n " + str(e)
+        error_message = "There was an exception trying to do the GCP storage operation with the submitted data \"" + gs_source_url + "\". When GCP tried, it told us: \"" + str(e) + "\""
         v = {'response': error_message, 'status': 'error'}
         return tolerant_jsonify(v)
     if stats:
@@ -84,10 +85,7 @@ def fetch_url_direct():
         )
         v = {'response': gcp_response, 'status': 'success'}
     else:
-        gcp_response = "File \"" + blob_name + "\"does not exist in bucket \"" + bucket_name + "\""
+        gcp_response = "GCP tried, but could not locate a file \"" + blob_name + "\" in a bucket called \"" + bucket_name + "\"."
         v = {'response': gcp_response, 'status': 'error'}
 
-    # Gregquestion 2-of-2 in this file
-    # The response v will need to have a nice, small set of fields to cleanly report the status of the url fetch,
-    # the url itself if successful, and any error messages if not. Is there a convention for this?
     return tolerant_jsonify(v)
