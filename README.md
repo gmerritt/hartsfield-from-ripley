@@ -40,3 +40,7 @@ export HARTSFIELD_ENV=development
 npm run serve-vue
 ```
 
+
+## A diagram of the intended function of the application:
+
+![Diagram of Hartsfield front end, back end, GCP components, and their relationships.](src/assets/2023-10-03_Hartsfield_diagram.png)
