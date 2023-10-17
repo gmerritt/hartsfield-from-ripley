@@ -51,7 +51,7 @@
 
 <script>
 import Context from '@/mixins/Context'
-import {fetchUrl} from '@/utils'
+import {fetchUrl} from '@/api/fetch-url'
 
 export default {
   name: 'fetchUrl',
