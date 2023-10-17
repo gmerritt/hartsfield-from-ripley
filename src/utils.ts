@@ -33,6 +33,7 @@ const $_axiosErrorHandler = (error: any) => {
 // Gregquestion 1-of-3 in this file:
 // Should the application-specific fetchUrl() function be here in utils.ts? Or should it be in a
 // separate file that's dedicated to application-specific functions?
+// --> move to /src/api/my_controller.ts
 
 
 // Gregquestion 2-of-3 in this file:
@@ -47,6 +48,7 @@ export function fetchUrl(gs_source_url: string) {
   // which appeared in later versions of Ripley in api-utils.ts (/src/api/api-utils.ts).
   // In later versions of Ripley, with the post support built-in, we'd do something like this:
   //return utils.post('/api/fetch_url_direct',{gs_source_url})
+  //--> dictionary w/ variable & value "gs_source_url"
 
 
   // gs%3A%2F%2Fucb-datahub-archived-homedirs%2Fspring-2021%2Fdatahub.berkeley.edu%2Fpeterphu-2edo.tar.gz

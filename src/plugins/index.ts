@@ -10,7 +10,7 @@ export function registerPlugins (app: App) {
   loadFonts().then(() => {})
   app
     .use(axios, {
-      baseUrl: process.env.VUE_APP_API_BASE_URL,
+      baseUrl: process.env.VITE_APP_API_BASE_URL,
       withCredentials: true
     })
     .use(createPinia())
