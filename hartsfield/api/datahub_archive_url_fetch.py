@@ -50,14 +50,12 @@ gcp_json_credentials_dict = json.loads(gcp_json_credentials)
 # Gregquestion: is this better if it's POST?
 # See also where this is called in utils.ts.
 # change to 'POST'
-@app.route('/api/fetch_url_direct', methods=['GET'])
+@app.route('/api/fetch_url_direct', methods=['POST'])
 def fetch_url_direct():
 
-
-    # parse the input gs url to get bucket and blob names
-    #gs_source_url="gs://ucb-datahub-archived-homedirs/spring-2021/datahub.berkeley.edu/peterphu-2edo.tar.gz"
-    #will be request.data or something
-    gs_source_url = str(request.args.get('gs_source_url'))
+    params = request.get_json()
+    gs_source_url = params.get('gs_source_url')
+        
     bucket_and_blob_string = gs_source_url.replace("gs://", "")
     bucket_and_blob_list = bucket_and_blob_string.split("/")
     bucket_name = bucket_and_blob_list.pop(0)
