@@ -1,18 +1,23 @@
 <script>
-import { mapActions } from 'pinia'
-import { useContextStore } from "@/stores/context"
+import {mapActions} from 'pinia'
+import {mapState} from 'pinia'
+import {useContextStore} from '@/stores/context'
 
 export default {
   name: 'Context',
-  setup() {
-    const context = useContextStore()
-    return {
-      currentUser: context.currentUser,
-      loading: context.loading
-    }
+  computed: {
+    ...mapState(useContextStore, [
+      'applicationState',
+      'config',
+      'currentUser',
+      'eventHub',
+      'isLoading',
+      'screenReaderAlert'
+    ]),
   },
   methods: {
     ...mapActions(useContextStore, [
+      'alertScreenReader',
       'loadingComplete',
       'loadingStart'
     ])

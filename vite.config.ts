@@ -2,15 +2,18 @@ import vue from '@vitejs/plugin-vue'
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
+import sass from 'sass';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
+        implementation: sass,
         additionalData: `
           @import "./src/styles/colors.scss";
-        `
+          @import "@/assets/scss/global.scss";
+          `
       }
     }
   },
@@ -45,3 +48,4 @@ export default defineConfig({
     port: 8080
   }
 })
+//        additionalData: '@import "@/assets/scss/global.scss";'

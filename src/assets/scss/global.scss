@@ -1,0 +1,118 @@
+@forward "variables";
+
+body {
+  cursor: auto;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 0;
+  overflow-x: hidden;
+  padding: 0;
+  position: relative;
+}
+fieldset {
+  border: 0 !important;
+}
+html {
+  overflow-y: unset !important;
+}
+
+html, body {
+  font-size: 14px;
+  height: 100%;
+}
+
+.height-unset {
+  height: unset !important;
+  min-height: unset !important;
+}
+
+* {
+  text-transform: none !important;
+}
+
+.alert-error-icon {
+  float: left;
+  font-size: 38px;
+  line-height: 45px;
+  margin-right: 5px;
+}
+.alert-close-button-container {
+  display: inline-block;
+  float: right;
+
+  .close-button {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    &, &:hover, &:focus, &:active, &:visited {
+      color: inherit;
+      font-family: FontAwesome;
+      font-size: 20px;
+      text-decoration: none;
+    }
+  }
+}
+
+.background-splash {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.canvas-page-form {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.ellipsis {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.font-size-15 {
+  font-size: 15px;
+}
+.font-size-16 {
+  font-size: 16px;
+}
+.font-size-20 {
+  font-size: 20px;
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+@media print {
+  html,
+  body {
+    height: fit-content;
+    *.display-none-when-print {
+      display: none;
+    }
+    *.avoid-break-inside-when-print {
+      break-inside: avoid-page;
+    }
+    *.v-main-when-print {
+      padding: 0;
+    }
+  }
+}
+@page {
+  margin-top: .8in;
+}
+@page :first {
+  margin-top: .4in;
+}

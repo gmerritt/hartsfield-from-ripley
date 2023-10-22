@@ -20,7 +20,7 @@
 @import 'styles/colors';
 </style>
 
-<style scoped lang="scss">
+<style lang="scss">
 .cc-accessibility-links {
   position: relative;
   z-index: 1;
@@ -40,6 +40,56 @@
       top: 5px;
       width: 200px;
     }
+  }
+}
+
+form {
+  input[type="number"],
+  input[type="password"],
+  input[type="text"],
+  textarea {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: $color-white;
+    border: 1px solid $color-very-light-grey;
+    border-radius: 3px !important;
+    box-shadow: inset 0 1px 2px $color-whisper;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0 0 4px;
+    padding: 8px 12px;
+    width: 100%;
+    &[disabled] {
+      color: $color-grey;
+    }
+    &.error{
+      border: 1px solid $color-harley-davidson-orange !important;
+      color: $color-harley-davidson-orange !important;
+      font-weight: 500;
+    }
+  }
+  select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: $color-white;
+    border: 1px solid $color-very-light-grey;
+    border-radius: 0;
+    font-family: $body-font-family;
+    font-size: 14px;
+    font-weight: 500;
+    height: 38px;
+    margin: 0 0 4px;
+    padding: 8px 14px 8px 9px;
+    width: 100%;
+    &[disabled] {
+      color: $color-grey;
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::placeholder {
+    color: $color-nobel;
   }
 }
 </style>
