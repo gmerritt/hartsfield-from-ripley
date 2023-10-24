@@ -49,7 +49,7 @@
           <label for="response-from-gcp" class="fetch-url-label mb-2 mt-3">
             Success: the following 7-day download U&ZeroWidthSpace;R&ZeroWidthSpace;L was created.
           </label>
-          <v-text-field id="response-from-gcp" v-model="responseFromGcp" />
+          <v-text-field id="response-from-gcp" v-model="responseFromGcp" readonly />
           <form class="bg-transparent border-0 canvas-form" @submit.prevent="copyText">
             <v-btn
                   id="copyText"
