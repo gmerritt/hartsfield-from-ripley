@@ -24,6 +24,13 @@ ENHANCEMENTS, OR MODIFICATIONS.
 """
 from flask_login import UserMixin
 
+def find_by_uid(user_uid):
+    if user_uid:
+        uid = next((uid for uid in app.config['AUTHORIZED_USERS'] if uid == int(user_uid)), None)
+        return User(uid) if uid else None
+    else:
+        return None
+
 
 class User(UserMixin):
 

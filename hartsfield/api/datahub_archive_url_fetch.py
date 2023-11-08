@@ -31,6 +31,7 @@ from hartsfield.configs import load_configs
 from hartsfield.api.config_controller import load_json
 from hartsfield.lib.http import tolerant_jsonify
 from hartsfield.lib.util import get_eb_environment
+from hartsfield.api.auth_helper import auth_required
 
 import requests
 import datetime
@@ -51,6 +52,7 @@ gcp_json_credentials_dict = json.loads(gcp_json_credentials)
 # See also where this is called in utils.ts.
 # change to 'POST'
 @app.route('/api/fetch_url_direct', methods=['POST'])
+@auth_required
 def fetch_url_direct():
 
     params = request.get_json()
