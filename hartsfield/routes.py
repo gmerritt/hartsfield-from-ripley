@@ -39,6 +39,7 @@ def register_routes(app):
     # Register API routes.
     import hartsfield.api.config_controller
     import hartsfield.api.datahub_archive_url_fetch
+    import hartsfield.api.user_controller
 
     # Register error handlers.
     import hartsfield.api.error_handlers

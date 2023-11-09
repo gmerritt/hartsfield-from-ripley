@@ -84,23 +84,13 @@ class User(UserMixin):
 
     @classmethod
     def _load_user(cls, uid=None):
-        calnet_profile = {}  # TODO: get_calnet_user_for_uid(app, uid) if uid else {}
-        expired = False  # TODO: calnet_profile.get('isExpiredPerLdap', True)
-        is_admin = False
-        is_teaching = False
-        is_active = (is_teaching or is_admin) and not expired
+        is_active = True if uid else False
 
         return {
-            **calnet_profile,
-            **{
-                'id': uid,
-                'emailAddress': calnet_profile.get('email'),
-                'isActive': is_active,
-                'isAdmin': is_admin,
-                'isAnonymous': not is_active,
-                'isAuthenticated': is_active,
-                'isTeaching': is_teaching,
-                'name': calnet_profile.get('name') or f'UID {uid}',
-                'uid': uid,
-            },
+            'id': uid,
+            'isActive': is_active,
+            'isAdmin': is_active,
+            'isAnonymous': not is_active,
+            'isAuthenticated': is_active,
+            'uid': uid,
         }
