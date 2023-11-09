@@ -1,17 +1,11 @@
 import axios from 'axios'
 import store from '@/store'
+import utils from '@/api/api-utils'
 
 export function getCasLoginURL() {
-//  const apiBaseUrl = store.getters['context/apiBaseUrl']
-  const apiBaseUrl = 'http://localhost:5000'
-  return axios
-    .get(`${apiBaseUrl}/api/user/cas_login_url`)
-    .then(response => response.data, err => err.response)
+  return utils.get('/api/user/cas_login_url')
 }
 
 export function getCasLogoutURL() {
-  const apiBaseUrl = store.getters['context/apiBaseUrl']
-  return axios
-    .get(`${apiBaseUrl}/api/user/cas_logout_url`)
-    .then(response => response.data, err => err.response)
+  return utils.get('/api/user/cas_logout_url')
 }

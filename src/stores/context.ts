@@ -36,6 +36,12 @@ export const useContextStore = defineStore('context', {
       this.loading = true
       // TODO: use '@vue-a11y/announcer' instead
       // state.screenReaderAlert = `${label || 'Page'} is loading...`
+    },
+    setConfig(config: any) {
+      this.config = config
+    },
+    setCurrentUser(user: any) {
+      this.currentUser = user
     }
   }
 })
