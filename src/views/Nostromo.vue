@@ -1,7 +1,4 @@
 <template>
-  <div v-if="currentUser">
-
-  </div>
   <div v-if="!currentUser" class="pt-2">
     <form @submit.prevent="casLogin">
       <button id="cas-log-in" class="btn btn-default btn-primary">Sign In via CAS</button>

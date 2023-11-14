@@ -48,9 +48,6 @@ PUBLIC_CONFIGS = [
 gcp_json_credentials = app.config['GCP_JSON_CREDENTIALS']
 gcp_json_credentials_dict = json.loads(gcp_json_credentials)
 
-# Gregquestion: is this better if it's POST?
-# See also where this is called in utils.ts.
-# change to 'POST'
 @app.route('/api/fetch_url_direct', methods=['POST'])
 @auth_required
 def fetch_url_direct():
