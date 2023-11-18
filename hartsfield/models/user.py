@@ -23,6 +23,7 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 ENHANCEMENTS, OR MODIFICATIONS.
 """
 from flask_login import UserMixin
+from flask import current_app as app
 
 def find_by_uid(user_uid):
     if user_uid:
