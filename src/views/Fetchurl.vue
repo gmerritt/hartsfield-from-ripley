@@ -101,16 +101,16 @@ export default {
   methods: {
     fetchUrl() {
       this.isRequesting = true
-      fetchUrl(this.gs_source_url).then(response => {
+      fetchUrl(this.gs_source_url).then(data => {
         this.isRequesting = false
-        if (response.data.status == "success") {
+        if (data.status == "success") {
           this.wasCreated = true
           this.failedCreate = false
         } else {
           this.wasCreated = false
           this.failedCreate = true
         }
-        this.responseFromGcp = response.data.response
+        this.responseFromGcp = data.response
       })
       isRequesting = false
     },

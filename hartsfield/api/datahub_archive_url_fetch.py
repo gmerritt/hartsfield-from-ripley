@@ -49,7 +49,7 @@ gcp_json_credentials = app.config['GCP_JSON_CREDENTIALS']
 gcp_json_credentials_dict = json.loads(gcp_json_credentials)
 
 @app.route('/api/fetch_url_direct', methods=['POST'])
-@auth_required
+# need @authorized_user deocrator here
 def fetch_url_direct():
 
     params = request.get_json()
