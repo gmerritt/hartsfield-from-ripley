@@ -3,15 +3,6 @@ import { nextTick } from 'vue'
 import { putFocusNextTick } from '@/utils'
 import { defineStore } from 'pinia'
 
-// Gregquestion
-// I came here via Nostromo.vue's
-//      import Context from '@/mixins/Context'
-// which led me this file via:
-//      import {useContextStore} from '@/stores/context'
-// At the bottom of this file, VSCode was unhappy with "config" in setConfig and with "currentUser" in setCurrentUser.
-// I kind of copied from ripley a bit, adding currentUser: undefined and config: undefined to the state.
-// That makes VSCode happy, with the last two actions, but does not seem sufficient for Nostromo.vue to
-// "get hip" to currentUser.
 
 export const useContextStore = defineStore('context', {
   state: () => ({
