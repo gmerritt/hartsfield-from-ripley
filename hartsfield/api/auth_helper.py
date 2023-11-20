@@ -28,6 +28,7 @@ from functools import wraps
 from flask import current_app as app, request
 from flask_login import current_user
 from hartsfield.api.errors import UnauthorizedRequestError
+from hartsfield.models.user import find_by_uid
 
 
 def auth_required(f):
@@ -36,6 +37,19 @@ def auth_required(f):
         if not current_user.is_authenticated:
             auth = request.authorization
             if not auth or not valid_worker_credentials(auth.username, auth.password):
+                raise UnauthorizedRequestError('Invalid credentials.')
+        return f(*args, **kwargs)
+    return decorated
+
+
+def authorzied_user_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        uid = current_user.uid
+        user = find_by_uid(uid)
+        if user is None:
+            auth = request.authorization
+            if not auth:
                 raise UnauthorizedRequestError('Invalid credentials.')
         return f(*args, **kwargs)
     return decorated
