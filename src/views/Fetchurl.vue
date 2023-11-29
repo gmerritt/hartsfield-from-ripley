@@ -35,13 +35,13 @@
               Enter G&ZeroWidthSpace;C&ZeroWidthSpace;P storage object URL
             </label>
             <textarea
-                id="page-fetch-url-name"
-                v-model="gs_source_url"
-                :disabled="isRequesting"
-                placeholder="gs://ucb-datahub-archived-homedirs/2022-2-summer/data100/.....tar.gz"
-                rows="4"
-              >
-            </textarea>
+              id="page-fetch-url-name"
+              v-model="gs_source_url"
+              :disabled="isRequesting"
+              placeholder="gs://ucb-datahub-archived-homedirs/2022-2-summer/data100/.....tar.gz"
+              rows="4"
+              required
+            ></textarea>
           </v-row>
 
           <v-row no-gutters> 
