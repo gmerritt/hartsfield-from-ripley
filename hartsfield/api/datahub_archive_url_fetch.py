@@ -24,6 +24,7 @@ ENHANCEMENTS, OR MODIFICATIONS.
 """
 import datetime
 import json
+import re
 
 from flask import current_app as app, request
 from google.cloud import storage
@@ -47,6 +48,10 @@ def fetch_url_direct():
 
     params = request.get_json()
     gs_source_url = params.get('gs_source_url')
+    if not re.match(r'gs://.{3,}/.+', gs_source_url):
+        error_message = 'The submitted data \"' + gs_source_url + '\" is not a valid gs_source_url.'
+        v = {'response': error_message, 'status': 'error'}
+        return tolerant_jsonify(v)
 
     bucket_and_blob_string = gs_source_url.replace('gs://', '')
     bucket_and_blob_list = bucket_and_blob_string.split('/')
