@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import auth from './auth'
-const Fetchurl = () => import('./views/Fetchurl.vue')
 
 const routes = [
   {

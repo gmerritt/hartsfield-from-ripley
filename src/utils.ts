@@ -2,8 +2,6 @@ import _ from 'lodash'
 import router from './router'
 import {App, nextTick} from 'vue'
 import { useContextStore } from '@/stores/context'
-import axios from 'axios'
-import utils from '@/api/api-utils'
 
 const $_axiosErrorHandler = (error: any) => {
   const errorStatus = _.get(error, 'response.status')

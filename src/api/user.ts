@@ -1,5 +1,3 @@
-import axios from 'axios'
-import store from '@/store'
 import utils from '@/api/api-utils'
 
 export function getCasLoginURL() {

@@ -3,9 +3,15 @@ import { nextTick } from 'vue'
 import { putFocusNextTick } from '@/utils'
 import { defineStore } from 'pinia'
 
+const $_getDefaultApplicationState = () => ({
+  message: undefined,
+  stacktrace: undefined,
+  status: 200
+})
 
 export const useContextStore = defineStore('context', {
   state: () => ({
+    applicationState: $_getDefaultApplicationState(),
     loading: false,
     currentUser: undefined,
     config: undefined
@@ -35,13 +41,11 @@ export const useContextStore = defineStore('context', {
         }).then(_.noop)
       }
     },
-    loadingStart(label?: string) {
-      this.loading = true
-      // TODO: use '@vue-a11y/announcer' instead
-      // state.screenReaderAlert = `${label || 'Page'} is loading...`
-    },
     setConfig(config: any) {
       this.config = config
+    },
+    setApplicationState(status: number, message?: any, stacktrace?: any) {
+      this.applicationState = {message, stacktrace, status}
     },
     setCurrentUser(user: any) {
       this.currentUser = user
