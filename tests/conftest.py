@@ -24,8 +24,8 @@ ENHANCEMENTS, OR MODIFICATIONS.
 """
 import os
 
-import pytest
 import hartsfield.factory
+import pytest
 
 
 os.environ['HARTSFIELD_ENV'] = 'test'  # noqa

@@ -22,8 +22,9 @@ SOFTWARE AND ACCOMPANYING DOCUMENTATION, IF ANY, PROVIDED HEREUNDER IS PROVIDED
 "AS IS". REGENTS HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES,
 ENHANCEMENTS, OR MODIFICATIONS.
 """
-from flask_login import UserMixin
 from flask import current_app as app
+from flask_login import UserMixin
+
 
 def find_by_uid(user_uid):
     if user_uid:
