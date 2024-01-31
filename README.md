@@ -4,25 +4,8 @@ Hartsfield humbly supports UC Berkeley's DataHub.
 
 ![Hartsfield, re-imagined as a field of hearts.](src/assets/hEartsfield.png)
 
-## Installation
-
-* Install Python 3
-* Create your virtual environment (venv)
-* Install dependencies
-
-```
-pip3 install -r requirements.txt [--upgrade]
-```
 
 
-### Create local configurations
-
-If you plan to use any resources outside localhost, put your configurations in a separately encrypted area:
-
-```
-mkdir /Volumes/XYZ/hartsfield_config
-export HARTSFIELD_LOCAL_CONFIGS=/Volumes/XYZ/hartsfield_config
-```
 
 ## To run this locally:
 
@@ -44,6 +27,14 @@ npm install
 npm audit fix
 ```
 
+### Securely install local configurations with secrets
+
+Put your configurations in a separately encrypted area outside of the project folder, which you will later export to environment variables. Ensure that your uid is in the AUTHORIZED_USERS list within that file.
+
+```
+mkdir /Volumes/XYZ/hartsfield_config
+```
+
 ### Run one terminal session for the python back end...
 
 ```
@@ -61,6 +52,9 @@ export HARTSFIELD_ENV=development
 npm run serve-vue
 ```
 
+## Using the application
+
+Browse to http://localhost:8080/ -- but note that the first access will take up to several minutes as all of the Node.js stuff does its thing! Subsequent access are fast.
 
 ## A diagram of the intended function of the application:
 
